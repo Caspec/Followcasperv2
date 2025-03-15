@@ -1,6 +1,6 @@
 <template>
   <section id="experience" class="container py-5">
-    <h2 class="text-center mb-5">🚀 My Journey</h2>
+    <h2 class="text-center mb-5">🚀 Work</h2>
     <div class="row">
       <div v-for="(job, index) in jobs" :key="index" class="col-12 col-lg-6 mb-4">
         <div class="card shadow-sm p-4 h-100">
@@ -28,7 +28,7 @@ const jobs = ref([
     year: '2024-2025',
     title: 'Software Engineer',
     company: 'Andel A/S',
-    icon: 'bi bi-code-slash',
+    icon: 'bi bi-layers',
     tasks: [
       'Developed system integrations in Go.',
       'Further developed Andel’s consumption database.',
@@ -71,7 +71,7 @@ const jobs = ref([
     year: '2018-2019',
     title: 'Web Developer',
     company: 'Risma Systems A/S',
-    icon: 'bi bi-terminal',
+    icon: 'bi bi-box',
     tasks: [
       'Developed Risk Matrix feature in Vue.js.',
       'Upgraded License Manager Laravel framework (5.2 → 5.6).',
@@ -83,8 +83,8 @@ const jobs = ref([
 
 <style scoped>
 .card {
-  border-radius: 12px;
   transition: 0.3s ease-in-out;
+  border-radius: 0 !important;
 }
 .card:hover {
   transform: translateY(-5px);

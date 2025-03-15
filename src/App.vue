@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#journey">Journey</a></li>
+            <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
@@ -37,7 +37,7 @@
       </div>
       <div></div>
     </header>
-    <WorkExperience id="journey" />
+    <WorkExperience id="work" />
     <section id="about" class="about-me container text-center my-5">
       <div class="row align-items-center text-md-start text-center flex-lg-row flex-column">
         <div class="col-lg-4 col-md-12 text-center mb-4">
@@ -97,9 +97,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import WorkExperience from '@/components/WorkExperience.vue'
+import profileImageSrc from '@/assets/me.png'
 
 const name = ref('Casper')
-const profileImage = ref('./src/images/me.png')
+const profileImage = ref(profileImageSrc)
 const github = ref('https://github.com/Caspec')
 const linkedin = ref('https://www.linkedin.com/in/casper-christensen88')
 
@@ -128,6 +129,7 @@ const skills = ref([
 
 .card {
   border: none;
+  border-radius: 0 !important;
 }
 
 .profile-img {
