@@ -3,7 +3,7 @@
     <h2 class="text-center mb-5">🚀 Work</h2>
     <div class="row">
       <div v-for="(job, index) in jobs" :key="index" class="col-12 col-lg-6 mb-4">
-        <div class="card shadow-sm p-4 h-100">
+        <div class="card p-4 h-100">
           <div class="d-flex align-items-center mb-3">
             <i :class="job.icon" class="display-6 text-primary me-3"></i>
             <div>
@@ -73,7 +73,7 @@ const jobs = ref([
     company: 'Risma Systems A/S',
     icon: 'bi bi-box',
     tasks: [
-      'Developed Risk Matrix feature in Vue.js.',
+      'Developed Risk Matrix feature in Vue.',
       'Upgraded License Manager Laravel framework (5.2 → 5.6).',
       'Worked with Vue and PHP Laravel on key projects.',
     ],
@@ -86,6 +86,7 @@ const jobs = ref([
   transition: 0.3s ease-in-out;
   border-radius: 0 !important;
 }
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);

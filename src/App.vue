@@ -128,13 +128,20 @@ const skills = ref([
 }
 
 .card {
-  border: none;
+  transition: 0.3s ease-in-out;
   border-radius: 0 !important;
+  border: 0px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .profile-img {
   transition: 0.3s ease-in-out;
 }
+
 .profile-img:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
