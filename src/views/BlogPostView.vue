@@ -10,7 +10,7 @@
         <h1>{{ post.title }}</h1>
         <div class="blog-content py-1">
           <p>{{ post.date }}</p>
-          <div v-html="post.content"></div>
+          <div>{{ post.content }}</div>
         </div>
       </div>
       <div v-else>
