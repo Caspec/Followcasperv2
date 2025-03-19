@@ -46,20 +46,19 @@
       <router-view></router-view>
     </div>
 
-    <section id="contact" class="bg-dark text-white py-3 text-center">
-      <h3>Let's Work Together</h3>
-      <div class="mt-3">
-        <a :href="linkedin" target="_blank" class="btn btn-light me-2"
-          ><i class="bi bi-linkedin"></i> LinkedIn</a
-        >
-        <a :href="github" target="_blank" class="btn btn-outline-light"
-          ><i class="bi bi-github"></i> GitHub</a
-        >
+    <footer id="contact" class="bg-dark text-center text-light py-3">
+      <div>
+        <h3>Let's Work Together</h3>
+        <div class="mt-3">
+          <a :href="linkedin" target="_blank" class="btn btn-light me-2">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+          <a :href="github" target="_blank" class="btn btn-outline-light">
+            <i class="bi bi-github"></i> GitHub
+          </a>
+        </div>
       </div>
-    </section>
-
-    <footer class="bg-dark text-center text-light py-3">
-      <p>&copy; {{ new Date().getFullYear() }} | Built with Vue 3</p>
+      <p class="mt-4">&copy; {{ new Date().getFullYear() }} | Built with Vue 3</p>
     </footer>
   </div>
 </template>
@@ -82,6 +81,18 @@ const scrollToTop = (event: MouseEvent) => {
 </script>
 
 <style scoped>
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .default {
   width: 100%;
 }
@@ -110,5 +121,31 @@ const scrollToTop = (event: MouseEvent) => {
 
 .disabled-link .nav-link[aria-disabled='true'] {
   cursor: not-allowed;
+}
+
+footer {
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+footer h3 {
+  margin-bottom: 20px;
+}
+
+footer .btn {
+  margin-right: 10px;
+}
+
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .default.container {
+    max-width: 100%;
+  }
 }
 </style>
