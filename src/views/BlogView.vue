@@ -7,9 +7,25 @@
           Welcome to the blog! Here I share interesting articles, tips, and more. <br />
           Happy reading!
         </p>
-        <div class="my-5">
+        <div class="filter-info mt-5">
+          <p>💡Select a category below to filter blog posts</p>
+        </div>
+        <div class="tag-filter">
+          <button
+            v-for="tag in tags"
+            :key="tag.tag"
+            @click="filterByTag(tag.tag)"
+            :class="{ 'active-tag': selectedTag === tag.tag }"
+          >
+            {{ tag.tag }} ({{ tag.count }})
+          </button>
+          <button class="btn btn-warning" v-if="selectedTag" @click="clearFilter">
+            Clear Filter
+          </button>
+        </div>
+        <div class="my-3">
           <h3>Latest Posts</h3>
-          <div v-for="post in sortedPosts" :key="post.id" class="post-section mt-3">
+          <div v-for="post in filteredPosts" :key="post.id" class="post-section mt-3">
             <router-link :to="`/blog/${post.slug}`" class="post-link">
               <div class="post-content">
                 <h2>{{ post.title }}</h2>
@@ -17,6 +33,7 @@
                 <p class="post-excerpt">
                   {{ truncateContent(post.content) }}
                 </p>
+                <p class="post-author">Written by {{ post.author }}</p>
                 <button class="btn btn-primary">Read More</button>
               </div>
             </router-link>
@@ -28,17 +45,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import type { Post } from '@/content/posts'
+import { ref, computed } from 'vue'
 import { posts } from '@/content/posts'
 
-const sortedPosts = ref<Post[]>([])
+const selectedTag = ref<string | null>(null)
 
-onMounted(() => {
-  sortedPosts.value = posts.slice().sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime()
-  })
+const sortedPosts = computed(() => {
+  return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
+
+const filteredPosts = computed(() => {
+  if (!selectedTag.value) return sortedPosts.value
+  return sortedPosts.value.filter(
+    (post) => selectedTag.value && post.tags?.includes(selectedTag.value),
+  )
+})
+
+const tags = computed(() => {
+  const tagCounts: { [key: string]: number } = {}
+  posts.forEach((post) => {
+    post.tags?.forEach((tag) => {
+      if (tagCounts[tag]) {
+        tagCounts[tag]++
+      } else {
+        tagCounts[tag] = 1
+      }
+    })
+  })
+  return Object.keys(tagCounts).map((tag) => ({
+    tag,
+    count: tagCounts[tag],
+  }))
+})
+
+const filterByTag = (tag: string) => {
+  selectedTag.value = tag
+}
+
+const clearFilter = () => {
+  selectedTag.value = null
+}
 
 const truncateContent = (content: string): string => {
   return content.length > 100 ? content.substring(0, 100) + '...' : content
@@ -103,5 +149,63 @@ const truncateContent = (content: string): string => {
   .blog-container .container {
     max-width: 100%;
   }
+}
+
+.filter-info {
+  background: #f8f9fa;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.tag-filter {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+}
+
+.tag-filter button {
+  margin: 5px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: #333;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 0px;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    transform 0.2s;
+}
+
+.tag-filter button:hover {
+  background: #f8f9fa;
+}
+
+.tag-filter button.active-tag {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+  transform: scale(1.05);
+}
+
+.tag-filter button.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+  border-color: #ffc107;
+}
+
+.tag-filter button.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+.post-author {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
 }
 </style>
