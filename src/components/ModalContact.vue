@@ -53,15 +53,4 @@ const copyToClipboard = async () => {
 .text-success {
   color: green;
 }
-
-.btn-outline-primary {
-  background-color: transparent;
-  border: 1px solid #007bff;
-  color: #007bff;
-}
-
-.btn-outline-primary:hover {
-  background-color: #007bff;
-  color: #fff;
-}
 </style>
