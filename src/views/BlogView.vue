@@ -29,7 +29,10 @@
             <router-link :to="getPostLink(post.slug)" class="post-link">
               <div class="post-content">
                 <h2>{{ post.title }}</h2>
-                <p class="post-date">{{ post.date }}</p>
+                <p class="post-meta">
+                  <span class="post-date">{{ post.date }} - </span>
+                  <span class="reading-time">{{ getReadingTime(post.content) }} min read</span>
+                </p>
                 <p class="post-excerpt">
                   {{ truncateContent(post.content) }}
                 </p>
@@ -146,9 +149,14 @@ watch(
   { immediate: true },
 )
 
-// Function to truncate post content for previews
 const truncateContent = (content: string): string => {
   return content.length > 100 ? content.substring(0, 100) + '...' : content
+}
+
+const getReadingTime = (content: string): number => {
+  const wordsPerMinute = 200
+  const words = content.split(/\s+/).length
+  return Math.max(1, Math.ceil(words / wordsPerMinute))
 }
 </script>
 
@@ -165,6 +173,35 @@ const truncateContent = (content: string): string => {
   max-width: 800px;
 }
 
+@media (max-width: 768px) {
+  .blog-container .container {
+    max-width: 100%;
+  }
+
+  .tag-filter {
+    gap: 2px;
+  }
+
+  .tag-filter button {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    margin: 3px !important;
+    line-height: 1.2;
+    min-width: 65px;
+  }
+
+  .tag-filter button.btn-warning {
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+  }
+
+  .btn-primary {
+    font-size: 14px !important;
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+  }
+}
+
 .post-section {
   background-color: #fff;
   padding: 15px;
@@ -178,6 +215,11 @@ const truncateContent = (content: string): string => {
 .post-section h2 {
   color: #007bff;
   font-size: 2rem;
+}
+
+.reading-time {
+  font-size: 1rem;
+  color: #6c757d;
 }
 
 .post-section .post-date {
@@ -204,30 +246,6 @@ const truncateContent = (content: string): string => {
   display: block;
   text-decoration: none;
   color: inherit;
-}
-
-@media (max-width: 768px) {
-  .blog-container .container {
-    max-width: 100%;
-  }
-
-  .tag-filter {
-    gap: 0;
-    justify-content: center;
-  }
-
-  .tag-filter button {
-    font-size: 12px;
-    padding: 4px 8px;
-    margin: 2px;
-    border-radius: 3px;
-    line-height: 1;
-  }
-
-  .tag-filter button.btn-warning {
-    font-size: 12px;
-    padding: 4px 8px;
-  }
 }
 
 .filter-info {

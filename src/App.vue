@@ -60,22 +60,26 @@
           <a :href="github" target="_blank" class="btn btn-outline-light">
             <i class="bi bi-github"></i> GitHub
           </a>
+          <button class="btn btn-success" @click="showContactModal = true">✉️ Contact Me</button>
         </div>
       </div>
       <p class="mt-4">&copy; {{ new Date().getFullYear() }} | Built with Vue 3</p>
     </footer>
+    <ContactModal :isVisible="showContactModal" @update:isVisible="showContactModal = $event" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import ContactModal from '@/components/ModalContact.vue'
 
 const github = ref('https://github.com/Caspec')
 const linkedin = ref('https://www.linkedin.com/in/casper-christensen88')
 
 const route = useRoute()
 const isMenuOpen = ref(false)
+const showContactModal = ref(false)
 
 const isHomePage = computed(() => route.path === '/')
 
