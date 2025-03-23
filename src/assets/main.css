@@ -1,1 +1,13 @@
 @import './base.css';
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.m-0 {
+  margin: 0;
+}

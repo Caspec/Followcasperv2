@@ -8,33 +8,39 @@
           Happy reading!
         </p>
         <div class="filter-info mt-5">
-          <p>💡Select a category below to filter blog posts</p>
+          <p>💡 Select categories below to filter blog posts</p>
         </div>
         <div class="tag-filter">
           <button
             v-for="tag in tags"
             :key="tag.tag"
-            @click="filterByTag(tag.tag)"
-            :class="{ 'active-tag': selectedTag === tag.tag }"
+            @click="toggleTag(tag.tag)"
+            :class="{ 'active-tag': selectedTags.includes(tag.tag) }"
           >
             {{ tag.tag }} ({{ tag.count }})
           </button>
-          <button class="btn btn-warning" v-if="selectedTag" @click="clearFilter">
+          <button class="btn btn-warning" v-if="selectedTags.length" @click="clearFilter">
             Clear Filter
           </button>
         </div>
         <div class="my-3">
           <h3>Latest Posts</h3>
           <div v-for="post in filteredPosts" :key="post.id" class="post-section mt-3">
-            <router-link :to="`/blog/${post.slug}`" class="post-link">
+            <router-link :to="getPostLink(post.slug)" class="post-link">
               <div class="post-content">
                 <h2>{{ post.title }}</h2>
                 <p class="post-date">{{ post.date }}</p>
                 <p class="post-excerpt">
                   {{ truncateContent(post.content) }}
                 </p>
-                <p class="post-author">Written by {{ post.author }}</p>
                 <button class="btn btn-primary">Read More</button>
+                <div class="post-minor mt-4">
+                  <p class="post-tags p-0 m-0">
+                    <span v-for="tag in post.tags ?? []" :key="tag" class="badge bg-success mr-1">
+                      {{ tag }}
+                    </span>
+                  </p>
+                </div>
               </div>
             </router-link>
           </div>
@@ -45,22 +51,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, watch, onMounted, nextTick } from 'vue'
+import { useTagStore } from '@/stores/useTagStore'
 import { posts } from '@/content/posts'
+import { useRoute, useRouter } from 'vue-router'
 
-const selectedTag = ref<string | null>(null)
+const store = useTagStore()
+const route = useRoute()
+const router = useRouter()
 
+// Computed to access selected tags from the store
+const selectedTags = computed(() => store.selectedTags)
+
+// Sorted posts based on date
 const sortedPosts = computed(() => {
   return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
 
+// Filter posts based on selected tags
 const filteredPosts = computed(() => {
-  if (!selectedTag.value) return sortedPosts.value
-  return sortedPosts.value.filter(
-    (post) => selectedTag.value && post.tags?.includes(selectedTag.value),
+  if (!selectedTags.value.length) return sortedPosts.value
+  return sortedPosts.value.filter((post) =>
+    post.tags?.some((tag) => selectedTags.value.includes(tag)),
   )
 })
 
+// Compute the available tags and their counts
 const tags = computed(() => {
   const tagCounts: { [key: string]: number } = {}
   posts.forEach((post) => {
@@ -78,14 +94,59 @@ const tags = computed(() => {
   }))
 })
 
-const filterByTag = (tag: string) => {
-  selectedTag.value = tag
+// Toggle tag selection (add or remove it from the store)
+const toggleTag = (tag: string) => {
+  store.toggleTag(tag)
+  syncURLWithTags()
 }
 
+// Clear all selected filters
 const clearFilter = () => {
-  selectedTag.value = null
+  store.clearTags()
+  syncURLWithTags()
 }
 
+// Sync the URL query params with the selected tags
+const syncURLWithTags = () => {
+  const queryTags = selectedTags.value.length ? { tags: selectedTags.value.join(',') } : {}
+  router.replace({ path: route.path, query: queryTags })
+  nextTick(() => {
+    router.replace({ path: route.path, query: queryTags })
+  })
+}
+
+// Generate a post link with the current query (preserving the filters)
+const getPostLink = (slug: string) => {
+  return { path: `/blog/${slug}`, query: route.query }
+}
+
+// On mount, load the tags from the URL if available
+onMounted(() => {
+  const queryTags = route.query.tags
+  if (queryTags) {
+    const tagsFromURL = (queryTags as string).split(',')
+    store.setTags(tagsFromURL)
+  }
+})
+
+// Watch for changes in selectedTags and sync with the URL
+watch(selectedTags, syncURLWithTags, { deep: true })
+
+// Watch for changes in query parameters (for example, when navigating back from a post)
+watch(
+  () => route.query.tags,
+  (newTags) => {
+    if (newTags) {
+      const tagsFromURL = (newTags as string).split(',')
+      store.setTags(tagsFromURL)
+    } else {
+      store.clearTags()
+    }
+  },
+  { immediate: true },
+)
+
+// Function to truncate post content for previews
 const truncateContent = (content: string): string => {
   return content.length > 100 ? content.substring(0, 100) + '...' : content
 }
@@ -203,9 +264,9 @@ const truncateContent = (content: string): string => {
   border-color: #e0a800;
 }
 
-.post-author {
-  font-size: 14px;
-  font-weight: bold;
+.post-tags {
+  font-style: italic;
+  font-size: 12px;
   color: #333;
 }
 </style>
