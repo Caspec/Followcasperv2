@@ -210,6 +210,24 @@ const truncateContent = (content: string): string => {
   .blog-container .container {
     max-width: 100%;
   }
+
+  .tag-filter {
+    gap: 0;
+    justify-content: center;
+  }
+
+  .tag-filter button {
+    font-size: 12px;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  .tag-filter button.btn-warning {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }
 
 .filter-info {

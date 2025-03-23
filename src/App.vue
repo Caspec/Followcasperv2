@@ -10,10 +10,14 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          @click="isMenuOpen = !isMenuOpen"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div
+          :class="['collapse', 'navbar-collapse', 'justify-content-end', { show: isMenuOpen }]"
+          id="navbarNav"
+        >
           <ul class="navbar-nav px-2">
             <li class="nav-item">
               <router-link class="nav-link" to="/" @click="scrollToTop">Home</router-link>
@@ -64,20 +68,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const github = ref('https://github.com/Caspec')
 const linkedin = ref('https://www.linkedin.com/in/casper-christensen88')
 
 const route = useRoute()
+const isMenuOpen = ref(false)
 
 const isHomePage = computed(() => route.path === '/')
 
 const scrollToTop = (event: MouseEvent) => {
   event.preventDefault()
   window.scrollTo(0, 0)
+  isMenuOpen.value = false
 }
+
+watch(route, () => {
+  isMenuOpen.value = false
+})
 </script>
 
 <style scoped>
