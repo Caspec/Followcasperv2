@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,18 +20,18 @@ const router = createRouter({
       props: true,
     },
   ],
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.hash) {
-    window.history.replaceState({ ...history.state }, '', to.path)
+    window.history.replaceState({ ...history.state }, '', to.path);
   }
   if (to.path === '/blog') {
     setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 0)
+      window.scrollTo(0, 0);
+    }, 0);
   }
-  next()
-})
+  next();
+});
 
-export default router
+export default router;

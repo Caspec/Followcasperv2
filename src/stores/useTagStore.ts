@@ -1,24 +1,24 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 export const useTagStore = defineStore('TagStore', () => {
-  const selectedTags = ref<string[]>([])
+  const selectedTags = ref<string[]>([]);
 
   const toggleTag = (tag: string) => {
     if (selectedTags.value.includes(tag)) {
-      selectedTags.value = selectedTags.value.filter((t) => t !== tag)
+      selectedTags.value = selectedTags.value.filter((t) => t !== tag);
     } else {
-      selectedTags.value.push(tag)
+      selectedTags.value.push(tag);
     }
-  }
+  };
 
   const clearTags = () => {
-    selectedTags.value = []
-  }
+    selectedTags.value = [];
+  };
 
   const setTags = (tags: string[]) => {
-    selectedTags.value = tags
-  }
+    selectedTags.value = tags;
+  };
 
-  return { selectedTags, toggleTag, clearTags, setTags }
-})
+  return { selectedTags, toggleTag, clearTags, setTags };
+});

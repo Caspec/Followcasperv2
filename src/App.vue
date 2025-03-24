@@ -72,28 +72,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import ContactModal from '@/components/ModalContact.vue'
+import { computed, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import ContactModal from '@/components/ModalContact.vue';
 
-const github = ref('https://github.com/Caspec')
-const linkedin = ref('https://www.linkedin.com/in/casper-christensen88')
+const github = ref('https://github.com/Caspec');
+const linkedin = ref('https://www.linkedin.com/in/casper-christensen88');
 
-const route = useRoute()
-const isMenuOpen = ref(false)
-const showContactModal = ref(false)
+const route = useRoute();
+const isMenuOpen = ref(false);
+const showContactModal = ref(false);
 
-const isHomePage = computed(() => route.path === '/')
+const isHomePage = computed(() => route.path === '/');
 
 const scrollToTop = (event: MouseEvent) => {
-  event.preventDefault()
-  window.scrollTo(0, 0)
-  isMenuOpen.value = false
-}
+  event.preventDefault();
+  window.scrollTo(0, 0);
+  isMenuOpen.value = false;
+};
 
 watch(route, () => {
-  isMenuOpen.value = false
-})
+  isMenuOpen.value = false;
+});
 </script>
 
 <style scoped>

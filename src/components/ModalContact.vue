@@ -19,24 +19,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import ModalUI from './ui/ModalUI.vue'
+import { ref } from 'vue';
+import ModalUI from './ui/ModalUI.vue';
 
-const isVisible = ref(false)
-const email = ref('casper.emde.christensen@gmail.com')
-const emailCopied = ref(false)
+const isVisible = ref(false);
+const email = ref('casper.emde.christensen@gmail.com');
+const emailCopied = ref(false);
 
 const copyToClipboard = async () => {
   try {
-    await navigator.clipboard.writeText(email.value)
-    emailCopied.value = true
+    await navigator.clipboard.writeText(email.value);
+    emailCopied.value = true;
     setTimeout(() => {
-      emailCopied.value = false
-    }, 3000)
+      emailCopied.value = false;
+    }, 3000);
   } catch (error) {
-    console.error('Failed to copy email to clipboard', error)
+    console.error('Failed to copy email to clipboard', error);
   }
-}
+};
 </script>
 
 <style scoped>

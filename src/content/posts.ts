@@ -1,13 +1,13 @@
 export type Post = {
-  id: number
-  title: string
-  date: string
-  excerpt: string
-  content: string
-  slug: string
-  author?: string
-  tags?: string[]
-}
+  id: number;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: string;
+  slug: string;
+  author?: string;
+  tags?: string[];
+};
 
 export const posts: Post[] = [
   {
@@ -52,4 +52,4 @@ export const posts: Post[] = [
     author: 'Casper',
     tags: ['Angular', 'TypeScript', 'Rich tooling'],
   },
-]
+];

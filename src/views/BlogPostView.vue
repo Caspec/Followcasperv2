@@ -29,33 +29,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { posts } from '@/content/posts'
+import { ref, onMounted } from 'vue';
+import { posts } from '@/content/posts';
 
 type Post = {
-  id: number
-  title: string
-  date: string
-  excerpt: string
-  content: string
-  slug: string
-  author?: string
-  tags?: string[]
-}
+  id: number;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: string;
+  slug: string;
+  author?: string;
+  tags?: string[];
+};
 
 const props = defineProps({
   slug: {
     type: String,
     required: true,
   },
-})
+});
 
-const post = ref<Post | null>(null)
+const post = ref<Post | null>(null);
 
 onMounted(() => {
-  const foundPost = posts.find((p) => p.slug === props.slug)
-  post.value = foundPost || null
-})
+  const foundPost = posts.find((p) => p.slug === props.slug);
+  post.value = foundPost || null;
+});
 </script>
 
 <style scoped>

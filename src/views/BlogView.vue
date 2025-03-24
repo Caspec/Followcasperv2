@@ -7,22 +7,9 @@
           Welcome to the blog! Here I share interesting articles, tips, and more. <br />
           Happy reading!
         </p>
-        <div class="filter-info mt-5">
-          <p>💡 Select categories below to filter blog posts</p>
-        </div>
-        <div class="tag-filter">
-          <button
-            v-for="tag in tags"
-            :key="tag.tag"
-            @click="toggleTag(tag.tag)"
-            :class="{ 'active-tag': selectedTags.includes(tag.tag) }"
-          >
-            {{ tag.tag }} ({{ tag.count }})
-          </button>
-          <button class="btn btn-warning" v-if="selectedTags.length" @click="clearFilter">
-            Clear Filter
-          </button>
-        </div>
+
+        <BlogFilter :posts="posts" />
+
         <div class="my-3">
           <h3>Latest Posts</h3>
           <div v-for="post in filteredPosts" :key="post.id" class="post-section mt-3">
@@ -54,110 +41,68 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onMounted, nextTick } from 'vue'
-import { useTagStore } from '@/stores/useTagStore'
-import { posts } from '@/content/posts'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, watch, onMounted } from 'vue';
+import { useTagStore } from '@/stores/useTagStore';
+import { posts } from '@/content/posts';
+import { useRoute } from 'vue-router';
+import BlogFilter from '@/components/BlogFilter.vue';
 
-const store = useTagStore()
-const route = useRoute()
-const router = useRouter()
+const store = useTagStore();
+const route = useRoute();
 
 // Computed to access selected tags from the store
-const selectedTags = computed(() => store.selectedTags)
+const selectedTags = computed(() => store.selectedTags);
 
 // Sorted posts based on date
 const sortedPosts = computed(() => {
-  return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-})
+  return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
 
 // Filter posts based on selected tags
 const filteredPosts = computed(() => {
-  if (!selectedTags.value.length) return sortedPosts.value
+  if (!selectedTags.value.length) return sortedPosts.value;
   return sortedPosts.value.filter((post) =>
     post.tags?.some((tag) => selectedTags.value.includes(tag)),
-  )
-})
-
-// Compute the available tags and their counts
-const tags = computed(() => {
-  const tagCounts: { [key: string]: number } = {}
-  posts.forEach((post) => {
-    post.tags?.forEach((tag) => {
-      if (tagCounts[tag]) {
-        tagCounts[tag]++
-      } else {
-        tagCounts[tag] = 1
-      }
-    })
-  })
-  return Object.keys(tagCounts).map((tag) => ({
-    tag,
-    count: tagCounts[tag],
-  }))
-})
-
-// Toggle tag selection (add or remove it from the store)
-const toggleTag = (tag: string) => {
-  store.toggleTag(tag)
-  syncURLWithTags()
-}
-
-// Clear all selected filters
-const clearFilter = () => {
-  store.clearTags()
-  syncURLWithTags()
-}
-
-// Sync the URL query params with the selected tags
-const syncURLWithTags = () => {
-  const queryTags = selectedTags.value.length ? { tags: selectedTags.value.join(',') } : {}
-  router.replace({ path: route.path, query: queryTags })
-  nextTick(() => {
-    router.replace({ path: route.path, query: queryTags })
-  })
-}
+  );
+});
 
 // Generate a post link with the current query (preserving the filters)
 const getPostLink = (slug: string) => {
-  return { path: `/blog/${slug}`, query: route.query }
-}
+  return { path: `/blog/${slug}`, query: route.query };
+};
 
 // On mount, load the tags from the URL if available
 onMounted(() => {
-  const queryTags = route.query.tags
+  const queryTags = route.query.tags;
   if (queryTags) {
-    const tagsFromURL = (queryTags as string).split(',')
-    store.setTags(tagsFromURL)
+    const tagsFromURL = (queryTags as string).split(',');
+    store.setTags(tagsFromURL);
   }
-})
-
-// Watch for changes in selectedTags and sync with the URL
-watch(selectedTags, syncURLWithTags, { deep: true })
+});
 
 // Watch for changes in query parameters (for example, when navigating back from a post)
 watch(
   () => route.query.tags,
   (newTags) => {
     if (newTags) {
-      const tagsFromURL = (newTags as string).split(',')
-      store.setTags(tagsFromURL)
+      const tagsFromURL = (newTags as string).split(',');
+      store.setTags(tagsFromURL);
     } else {
-      store.clearTags()
+      store.clearTags();
     }
   },
   { immediate: true },
-)
+);
 
 const truncateContent = (content: string): string => {
-  return content.length > 100 ? content.substring(0, 100) + '...' : content
-}
+  return content.length > 100 ? content.substring(0, 100) + '...' : content;
+};
 
 const getReadingTime = (content: string): number => {
-  const wordsPerMinute = 200
-  const words = content.split(/\s+/).length
-  return Math.max(1, Math.ceil(words / wordsPerMinute))
-}
+  const wordsPerMinute = 200;
+  const words = content.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+};
 </script>
 
 <style scoped>
@@ -176,23 +121,6 @@ const getReadingTime = (content: string): number => {
 @media (max-width: 768px) {
   .blog-container .container {
     max-width: 100%;
-  }
-
-  .tag-filter {
-    gap: 2px;
-  }
-
-  .tag-filter button {
-    font-size: 13px !important;
-    padding: 6px 10px !important;
-    margin: 3px !important;
-    line-height: 1.2;
-    min-width: 65px;
-  }
-
-  .tag-filter button.btn-warning {
-    font-size: 13px !important;
-    padding: 6px 10px !important;
   }
 
   .btn-primary {
@@ -242,58 +170,6 @@ const getReadingTime = (content: string): number => {
   display: block;
   text-decoration: none;
   color: inherit;
-}
-
-.filter-info {
-  background: #f8f9fa;
-  border-radius: 5px;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.tag-filter {
-  display: flex;
-  gap: 1px;
-  flex-wrap: wrap;
-}
-
-.tag-filter button {
-  margin: 5px;
-  padding: 12px 20px;
-  background: #ffffff;
-  color: #333;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 0px;
-  transition:
-    background 0.3s,
-    color 0.3s,
-    transform 0.2s;
-}
-
-.tag-filter button:hover {
-  background: #f8f9fa;
-}
-
-.tag-filter button.active-tag {
-  background: #007bff;
-  color: white;
-  border-color: #007bff;
-  transform: scale(1.05);
-}
-
-.tag-filter button.btn-warning {
-  background-color: #ffc107;
-  color: #212529;
-  border-color: #ffc107;
-}
-
-.tag-filter button.btn-warning:hover {
-  background-color: #e0a800;
-  border-color: #e0a800;
 }
 
 .post-tags {
