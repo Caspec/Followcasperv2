@@ -60,6 +60,8 @@
           <a :href="github" target="_blank" class="btn btn-outline-light">
             <i class="bi bi-github"></i> GitHub
           </a>
+        </div>
+        <div class="mt-3">
           <button class="btn btn-success" @click="showContactModal = true">✉️ Contact Me</button>
         </div>
       </div>

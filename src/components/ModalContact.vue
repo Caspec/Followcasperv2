@@ -49,8 +49,4 @@ const copyToClipboard = async () => {
 .form-label {
   font-weight: bold;
 }
-
-.text-success {
-  color: green;
-}
 </style>
