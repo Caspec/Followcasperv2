@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, defineProps, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 const emit = defineEmits(['update:isVisible'])
 const props = defineProps({
