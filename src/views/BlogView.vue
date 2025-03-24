@@ -233,10 +233,6 @@ const getReadingTime = (content: string): number => {
   margin-bottom: 15px;
 }
 
-.post-section .btn {
-  padding: 10px 15px;
-}
-
 .post-section:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
