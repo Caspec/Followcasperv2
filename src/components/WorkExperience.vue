@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const jobs = ref([
   {
@@ -78,7 +78,7 @@ const jobs = ref([
       'Worked with Vue and PHP Laravel on key projects.',
     ],
   },
-])
+]);
 </script>
 
 <style scoped>

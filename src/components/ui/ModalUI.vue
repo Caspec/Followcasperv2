@@ -33,33 +33,33 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch } from 'vue';
 
-const emit = defineEmits(['update:isVisible'])
+const emit = defineEmits(['update:isVisible']);
 const props = defineProps({
   isVisible: {
     type: Boolean,
     required: true,
   },
-})
+});
 
-const localIsVisible = ref(props.isVisible)
+const localIsVisible = ref(props.isVisible);
 
 const closeModal = () => {
-  localIsVisible.value = false
-  emit('update:isVisible', false)
-}
+  localIsVisible.value = false;
+  emit('update:isVisible', false);
+};
 
 const handleBackdropClick = () => {
-  closeModal()
-}
+  closeModal();
+};
 
 watch(
   () => props.isVisible,
   (newVal) => {
-    localIsVisible.value = newVal
+    localIsVisible.value = newVal;
   },
-)
+);
 </script>
 
 <style scoped>

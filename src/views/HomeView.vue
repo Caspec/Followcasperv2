@@ -57,12 +57,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import WorkExperience from '@/components/WorkExperience.vue'
-import profileImageSrc from '@/assets/me.png'
+import { ref } from 'vue';
+import WorkExperience from '@/components/WorkExperience.vue';
+import profileImageSrc from '@/assets/me.png';
 
-const name = ref('Casper')
-const profileImage = ref(profileImageSrc)
+const name = ref('Casper');
+const profileImage = ref(profileImageSrc);
 
 const skills = ref([
   { name: 'Vue', icon: 'bi bi-code-slash' },
@@ -72,7 +72,7 @@ const skills = ref([
   { name: 'Laravel', icon: 'bi bi-layers' },
   { name: 'Go', icon: 'bi bi-globe' },
   { name: 'More...', icon: 'bi bi-three-dots' },
-])
+]);
 </script>
 
 <style scoped>
