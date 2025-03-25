@@ -40,6 +40,18 @@
       </div>
     </section>
 
+    <section id="fun-facts" class="fun-facts container my-5 text-center">
+      <h2 class="mb-4">Fun Facts About Me</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4" v-for="(fact, index) in funFacts" :key="index">
+          <div class="card p-3">
+            <h5 class="mt-3 text-center fw-bold">{{ fact.title }}</h5>
+            <p>{{ fact.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="skills" class="py-5 bg-light">
       <div class="container text-center">
         <h2 class="mb-4">Tech Stack</h2>
@@ -73,6 +85,39 @@ const skills = ref([
   { name: 'Go', icon: 'bi bi-globe' },
   { name: 'More...', icon: 'bi bi-three-dots' },
 ]);
+
+const funFacts = ref([
+  {
+    title: '🎣 Fishing Enthusiast',
+    description:
+      'In my spare time, I love to fish and unwind by the water. It’s a peaceful hobby that helps me recharge and reconnect with nature. My personal record for rainbow trout is 5kg!',
+  },
+  {
+    title: '🚲 Bicycle Mechanic Background',
+    description:
+      'Before diving into tech, I worked as a bicycle mechanic (known as "cykelmontør" in Danish). This hands-on experience taught me attention to detail, problem-solving, and the satisfaction of fixing things with my own two hands.',
+  },
+  {
+    title: '🍲 Master of Mørbradgryde',
+    description:
+      'One of my culinary specialties is making a delicious Mørbradgryde, a traditional Danish pork stew. It’s a family favorite and I love experimenting with different flavors to perfect it!',
+  },
+  {
+    title: '🗣️ Once Had a Long Conversation with Ulf Pilgaard',
+    description:
+      'While working at Fakta, I had the chance to talk to actor Ulf Pilgaard for an extended period of time. It was an unforgettable experience, and he was friendly and eager to chat!',
+  },
+  {
+    title: '📺 Old Danish Movies & Actors',
+    description:
+      'I have a soft spot for classic Danish films and series. I enjoy learning about the stories behind iconic actors, especially through shows like "Her Er Dit Liv". Also, I’m a fan of shows like "Nak & Æd", which never fail to entertain me.',
+  },
+  {
+    title: '🏆 Sports',
+    description:
+      'I am passionate about watching sports, especially cycling, soccer, handball, and snooker, both live in person and on TV, especially competitions that keep me glued to the screen!',
+  },
+]);
 </script>
 
 <style scoped>
@@ -105,5 +150,24 @@ const skills = ref([
 .profile-img:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.fun-facts .card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+  min-height: 220px;
+  text-align: left;
+}
+
+.fun-facts .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fun-facts p {
+  font-size: 1rem;
+  color: #555;
 }
 </style>
