@@ -1,11 +1,5 @@
 <template>
   <div id="app" :class="{ 'dark-mode': isDarkMode }">
-    <div class="dark-mode-toggle">
-      <button @click="toggleDarkMode" class="dark-mode-btn">
-        <span v-if="isDarkMode">☀️ Light Mode</span>
-        <span v-else>🌙 Dark Mode</span>
-      </button>
-    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top w-100">
       <div class="container-fluid">
         <router-link class="nav-link" to="/" @click="scrollToTop">
@@ -43,9 +37,14 @@
                 >Contact</a
               >
             </li>
-
             <li class="nav-item">
               <router-link class="nav-link" to="/blog">Blog</router-link>
+            </li>
+            <li class="nav-item">
+              <button @click="toggleDarkMode" class="dark-mode-btn">
+                <span v-if="isDarkMode">☀️</span>
+                <span v-else>🌙</span>
+              </button>
             </li>
           </ul>
         </div>
@@ -122,10 +121,6 @@ onMounted(() => {
 @media (max-width: 768px) {
   .default.container {
     max-width: 100%;
-  }
-
-  .dark-mode-toggle {
-    display: none;
   }
 }
 
@@ -213,14 +208,11 @@ footer p {
 }
 
 .dark-mode-btn {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition:
-    background 0.3s,
-    transform 0.2s;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  transition: background 0.2s ease-in-out;
 }
 
 .dark-mode-btn:hover {
