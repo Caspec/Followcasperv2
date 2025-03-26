@@ -42,11 +42,11 @@
 
     <section id="fun-facts" class="fun-facts container my-5 text-center">
       <h2 class="mb-4">Fun Facts About Me</h2>
-      <div class="row">
-        <div class="col-md-4 mb-4" v-for="(fact, index) in funFacts" :key="index">
-          <div class="card p-3">
-            <h5 class="mt-3 text-center fw-bold">{{ fact.title }}</h5>
-            <p>{{ fact.description }}</p>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" v-for="(fact, index) in funFacts" :key="index">
+          <div class="card h-100 p-3">
+            <h5 class="text-center fw-bold flex-shrink-0">{{ fact.title }}</h5>
+            <p class="flex-grow-1 d-flex align-items-center">{{ fact.description }}</p>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ const funFacts = ref([
       'One of my culinary specialties is making a delicious Mørbradgryde, a traditional Danish pork stew. It’s a family favorite and I love experimenting with different flavors to perfect it!',
   },
   {
-    title: '🗣️ Once Had a Long Conversation with Ulf Pilgaard',
+    title: '🗣️ Once Had a Long Conversation',
     description:
       'While working at Fakta, I had the chance to talk to actor Ulf Pilgaard for an extended period of time. It was an unforgettable experience, and he was friendly and eager to chat!',
   },
@@ -121,6 +121,13 @@ const funFacts = ref([
 </script>
 
 <style scoped>
+@media (max-width: 768px) {
+  .fun-facts .row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .hero {
   height: 90vh;
   background-image: url('../images/hero.jpg');
@@ -157,17 +164,25 @@ const funFacts = ref([
   border-radius: 8px;
   background-color: #fff;
   padding: 20px;
-  min-height: 220px;
   text-align: left;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.fun-facts .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.fun-facts h5 {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fun-facts p {
   font-size: 1rem;
   color: #555;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 </style>
