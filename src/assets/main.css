@@ -11,3 +11,34 @@
 .m-0 {
   margin: 0;
 }
+
+/* Dark Mode styles */
+body.dark-mode #skills {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+
+body.dark-mode .blog {
+  color: #ffffff;
+}
+
+body.dark-mode .blog-intro {
+  color: #cccccc;
+}
+
+.blog {
+  color: #333;
+}
+
+.blog-intro {
+  color: #000;
+}
+
+.modal-body {
+  color: #000;
+}
+
+#skills {
+  background-color: #f8f9fa;
+  color: #000;
+}

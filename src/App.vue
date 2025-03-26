@@ -1,5 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'dark-mode': isDarkMode }">
+    <div class="dark-mode-toggle">
+      <button @click="toggleDarkMode" class="dark-mode-btn">
+        <span v-if="isDarkMode">☀️ Light Mode</span>
+        <span v-else>🌙 Dark Mode</span>
+      </button>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top w-100">
       <div class="container-fluid">
         <router-link class="nav-link" to="/" @click="scrollToTop">
@@ -72,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import ContactModal from '@/components/ModalContact.vue';
 
@@ -82,6 +88,7 @@ const linkedin = ref('https://www.linkedin.com/in/casper-christensen88');
 const route = useRoute();
 const isMenuOpen = ref(false);
 const showContactModal = ref(false);
+const isDarkMode = ref(false);
 
 const isHomePage = computed(() => route.path === '/');
 
@@ -94,9 +101,34 @@ const scrollToTop = (event: MouseEvent) => {
 watch(route, () => {
   isMenuOpen.value = false;
 });
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  document.documentElement.classList.toggle('dark-mode', isDarkMode.value);
+
+  localStorage.setItem('darkMode', isDarkMode.value.toString());
+};
+
+onMounted(() => {
+  const savedMode = localStorage.getItem('darkMode');
+  if (savedMode === 'true') {
+    isDarkMode.value = true;
+    document.documentElement.classList.add('dark-mode');
+  }
+});
 </script>
 
 <style scoped>
+@media (max-width: 768px) {
+  .default.container {
+    max-width: 100%;
+  }
+
+  .dark-mode-toggle {
+    display: none;
+  }
+}
+
 html,
 body {
   height: 100%;
@@ -159,9 +191,49 @@ footer p {
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .default.container {
-    max-width: 100%;
-  }
+.dark-mode {
+  background-color: #121212;
+  color: #fff;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  border-color: #444;
+}
+
+.dark-mode footer {
+  background-color: #222;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  z-index: 1000;
+}
+
+.dark-mode-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+}
+
+.dark-mode-btn:hover {
+  transform: scale(1.05);
+}
+
+body:not(.dark-mode) .dark-mode-btn {
+  background: #000;
+  color: #fff;
+}
+
+body.dark-mode .dark-mode-btn {
+  background: #fff;
+  color: #000;
 }
 </style>

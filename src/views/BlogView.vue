@@ -1,9 +1,9 @@
 <template>
   <div class="blog-container py-5">
     <div class="container py-3">
-      <h1>Blog</h1>
+      <h1 class="blog">Blog</h1>
       <div class="blog-content py-1">
-        <p>
+        <p class="blog-intro">
           Welcome to the blog! Here I share interesting articles, tips, and more. <br />
           Happy reading!
         </p>
@@ -116,6 +116,7 @@ const getReadingTime = (content: string): number => {
 
 .blog-container .container {
   max-width: 800px;
+  min-height: 1000px;
 }
 
 @media (max-width: 768px) {
