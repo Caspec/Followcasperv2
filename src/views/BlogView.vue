@@ -12,7 +12,7 @@
 
         <div class="my-3">
           <h3>Latest Posts</h3>
-          <div v-for="post in filteredPosts" :key="post.id" class="post-section mt-3">
+          <div v-for="post in paginatedPosts" :key="post.id" class="post-section mt-3">
             <router-link :to="getPostLink(post.slug)" class="post-link">
               <div class="post-content">
                 <h2>{{ post.title }}</h2>
@@ -34,6 +34,11 @@
               </div>
             </router-link>
           </div>
+          <Pagination
+            :total-posts="filteredPosts.length"
+            :posts-per-page="postsPerPage"
+            v-model:current-page="currentPage"
+          />
         </div>
       </div>
     </div>
@@ -41,14 +46,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, onMounted } from 'vue';
+import { computed, watch, onMounted, ref } from 'vue';
 import { useTagStore } from '@/stores/useTagStore';
 import { posts } from '@/content/posts';
 import { useRoute } from 'vue-router';
 import BlogFilter from '@/components/BlogFilter.vue';
+import Pagination from '@/components/ui/PaginationUI.vue';
 
 const store = useTagStore();
 const route = useRoute();
+const currentPage = ref(1);
+const postsPerPage = ref(3);
 
 // Computed to access selected tags from the store
 const selectedTags = computed(() => store.selectedTags);
@@ -93,6 +101,17 @@ watch(
   },
   { immediate: true },
 );
+
+// Watch for changes in filteredPosts and reset pagination
+watch(filteredPosts, () => {
+  currentPage.value = 1;
+});
+
+const paginatedPosts = computed(() => {
+  const start = (currentPage.value - 1) * postsPerPage.value;
+  const end = start + postsPerPage.value;
+  return filteredPosts.value.slice(start, end);
+});
 
 const truncateContent = (content: string): string => {
   return content.length > 100 ? content.substring(0, 100) + '...' : content;
