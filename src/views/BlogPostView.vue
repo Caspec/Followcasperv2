@@ -57,22 +57,3 @@ onMounted(() => {
   post.value = foundPost || null;
 });
 </script>
-
-<style scoped>
-.go-back-arrow {
-  display: inline-flex;
-  align-items: center;
-  font-size: 18px;
-  color: #007bff;
-  text-decoration: none;
-  margin-top: 10px;
-}
-
-.go-back-arrow i {
-  margin-right: 5px;
-}
-
-.go-back-arrow:hover {
-  text-decoration: underline;
-}
-</style>

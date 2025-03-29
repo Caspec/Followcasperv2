@@ -8,7 +8,6 @@
       </p>
 
       <div class="my-3">
-        <h3>Latest Games</h3>
         <div v-for="game in games" :key="game.id" class="games-section mt-3">
           <router-link :to="getGameLink(game.slug)" class="game-link">
             <div class="game-content">
