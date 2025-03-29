@@ -40,6 +40,9 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/blog">Blog</router-link>
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/games">Games</router-link>
+            </li>
             <li class="nav-item mt-1">
               <button @click="toggleDarkMode" class="dark-mode-btn">
                 <span v-if="isDarkMode">☀️</span>

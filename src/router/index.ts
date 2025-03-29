@@ -19,6 +19,11 @@ const router = createRouter({
       component: () => import('@/views/BlogPostView.vue'),
       props: true,
     },
+    {
+      path: '/games',
+      name: 'games',
+      component: () => import('@/views/GamesView.vue'),
+    },
   ],
 });
 
@@ -26,7 +31,7 @@ router.beforeEach((to, from, next) => {
   if (to.hash) {
     window.history.replaceState({ ...history.state }, '', to.path);
   }
-  if (to.path === '/blog') {
+  if (to.path === '/blog' || to.path === '/games') {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 0);
