@@ -34,6 +34,14 @@ body.dark-mode .blog-intro {
   color: #000;
 }
 
+.games {
+  color: #333;
+}
+
+.games-intro {
+  color: #000;
+}
+
 .modal-body {
   color: #000;
 }
@@ -41,4 +49,21 @@ body.dark-mode .blog-intro {
 #skills {
   background-color: #f8f9fa;
   color: #000;
+}
+
+.go-back-arrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.go-back-arrow i {
+  margin-right: 5px;
+}
+
+.go-back-arrow:hover {
+  text-decoration: underline;
 }

@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'games',
       component: () => import('@/views/GamesView.vue'),
     },
+    {
+      path: '/games/tic-tac-toe',
+      name: 'games/tic-tac-toe',
+      component: () => import('@/components/games/TicTacToe/TicTacToe.vue'),
+    },
   ],
 });
 

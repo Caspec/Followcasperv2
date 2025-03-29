@@ -13,9 +13,9 @@ export const games: Games[] = [
   {
     id: 1,
     title: 'Tic Tac Toe',
-    date: '2025-03-19',
-    description: 'This is my first game',
-    slug: 'my-first-game',
+    date: '2025-03-29',
+    description: 'This is my first game of tic tac toe',
+    slug: 'tic-tac-toe',
     imageHero: 'image1.jpg',
     tags: ['TicTacToe', 'Game'],
   },
