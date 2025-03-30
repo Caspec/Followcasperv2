@@ -67,3 +67,11 @@ body.dark-mode .blog-intro {
 .go-back-arrow:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .blog-container .container {
+    max-width: 100%;
+    min-height: 1000px;
+    color: #000;
+  }
+}

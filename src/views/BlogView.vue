@@ -139,10 +139,6 @@ const getReadingTime = (content: string): number => {
 }
 
 @media (max-width: 768px) {
-  .blog-container .container {
-    max-width: 100%;
-  }
-
   .btn-primary {
     font-size: 14px !important;
     padding: 6px 10px !important;
