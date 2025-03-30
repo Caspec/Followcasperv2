@@ -11,6 +11,13 @@
         <i class="bi bi-arrow-left"></i> Go Back to Games List
       </router-link>
     </div>
+    <ConfettiExplosion
+      v-if="isConfettiVisible"
+      :duration="5000"
+      :angle="90"
+      :particles="100"
+      :fadeOut="true"
+    />
     <div class="mt-5 text-center">
       <h2>Tic Tac Toe</h2>
       <Board :cells="cells" @cell-click="handleCellClick" />
@@ -19,7 +26,9 @@
           winner ? `${winner} wins!` : isDraw ? "It's a draw!" : `Player ${currentPlayer}'s Turn`
         }}
       </p>
-      <button class="btn btn-success" @click="resetGame">Reset</button>
+      <button class="btn btn-success" @click="resetGame">
+        {{ winner ? 'Play again' : 'Reset' }}
+      </button>
     </div>
   </div>
 </template>
@@ -27,11 +36,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import Board from './TicTacToeBoard.vue';
+import ConfettiExplosion from 'vue-confetti-explosion';
 
 const cells = ref(Array(9).fill(null));
 const currentPlayer = ref('X');
 const winner = ref<string | null>(null);
 const isDraw = computed(() => !winner.value && cells.value.every((cell) => cell !== null));
+const isConfettiVisible = ref(false);
 
 const checkWinner = () => {
   const winPatterns = [
@@ -57,7 +68,15 @@ const handleCellClick = (index: number) => {
   if (!cells.value[index] && !winner.value) {
     cells.value[index] = currentPlayer.value;
     winner.value = checkWinner();
-    currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
+    if (winner.value) {
+      isConfettiVisible.value = true;
+      setTimeout(() => {
+        isConfettiVisible.value = false;
+      }, 4000);
+    }
+    if (!winner.value) {
+      currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
+    }
   }
 };
 
