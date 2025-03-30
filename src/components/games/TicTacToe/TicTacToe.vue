@@ -95,7 +95,7 @@ const resetGame = () => {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 1000px;
+  min-height: 1020px;
 }
 
 .winner-message {
