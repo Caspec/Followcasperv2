@@ -44,6 +44,21 @@ const winner = ref<string | null>(null);
 const isDraw = computed(() => !winner.value && cells.value.every((cell) => cell !== null));
 const isConfettiVisible = ref(false);
 
+// Does not work in composables DRY
+const disableScroll = () => {
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${window.scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.width = '100%';
+};
+
+const enableScroll = () => {
+  const scrollY = document.body.style.top;
+  document.body.style.position = '';
+  document.body.style.top = '';
+  window.scrollTo(0, parseInt(scrollY || '0') * -1);
+};
+
 const checkWinner = () => {
   const winPatterns = [
     [0, 1, 2],
@@ -69,9 +84,11 @@ const handleCellClick = (index: number) => {
     cells.value[index] = currentPlayer.value;
     winner.value = checkWinner();
     if (winner.value) {
+      disableScroll();
       isConfettiVisible.value = true;
       setTimeout(() => {
         isConfettiVisible.value = false;
+        enableScroll();
       }, 4000);
     }
     if (!winner.value) {
@@ -88,16 +105,6 @@ const resetGame = () => {
 </script>
 
 <style scoped>
-.game-container {
-  background-color: #f8f9fa;
-  color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 1020px;
-}
-
 .winner-message {
   height: 24px;
   line-height: 24px;
