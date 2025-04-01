@@ -19,7 +19,13 @@
       :fadeOut="true"
     />
     <div class="mt-5 text-center">
-      <h2>Tic Tac Toe</h2>
+      <h2 class="mb-3">Tic Tac Toe</h2>
+      <label for="difficulty">Select AI Difficulty:</label>
+      <select v-model="difficulty" class="form-select mb-3 w-100 mx-auto text-center">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
       <Board :cells="cells" @cell-click="handleCellClick" />
       <p class="turn-indicator">
         {{
@@ -37,12 +43,15 @@
 import { ref, computed } from 'vue';
 import Board from './TicTacToeBoard.vue';
 import ConfettiExplosion from 'vue-confetti-explosion';
+import { useTicTacToeAI } from '@/composables/useTicTacToeAI';
 
 const cells = ref(Array(9).fill(null));
 const currentPlayer = ref('X');
 const winner = ref<string | null>(null);
 const isDraw = computed(() => !winner.value && cells.value.every((cell) => cell !== null));
 const isConfettiVisible = ref(false);
+const difficulty = ref<'easy' | 'medium' | 'hard'>('medium');
+const { getAIMove, checkWinner } = useTicTacToeAI({ cells, difficulty });
 
 // Does not work in composables DRY
 const disableScroll = () => {
@@ -59,26 +68,6 @@ const enableScroll = () => {
   window.scrollTo(0, parseInt(scrollY || '0') * -1);
 };
 
-const checkWinner = () => {
-  const winPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (const pattern of winPatterns) {
-    const [a, b, c] = pattern;
-    if (cells.value[a] && cells.value[a] === cells.value[b] && cells.value[a] === cells.value[c]) {
-      return cells.value[a];
-    }
-  }
-  return null;
-};
-
 const handleCellClick = (index: number) => {
   if (!cells.value[index] && !winner.value) {
     cells.value[index] = currentPlayer.value;
@@ -91,8 +80,17 @@ const handleCellClick = (index: number) => {
         enableScroll();
       }, 4000);
     }
+
     if (!winner.value) {
-      currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
+      currentPlayer.value = 'O';
+      setTimeout(() => {
+        const aiMove = getAIMove();
+        if (aiMove !== null) {
+          cells.value[aiMove] = 'O';
+          winner.value = checkWinner();
+        }
+        currentPlayer.value = 'X';
+      }, 500);
     }
   }
 };
