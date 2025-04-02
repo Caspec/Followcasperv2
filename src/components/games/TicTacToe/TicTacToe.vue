@@ -26,14 +26,21 @@
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
-      <Board :cells="cells" @cell-click="handleCellClick" />
-      <p class="turn-indicator">
+      <Board :cells="cells" :winningCells="winningCells" @cell-click="handleCellClick" />
+      <p
+        class="turn-indicator"
+        :class="{
+          x: currentPlayer === 'X' && !isDraw,
+          o: currentPlayer === 'O' && !isDraw,
+          draw: isDraw,
+        }"
+      >
         {{
           winner ? `${winner} wins!` : isDraw ? "It's a draw!" : `Player ${currentPlayer}'s Turn`
         }}
       </p>
       <button class="btn btn-success" @click="resetGame">
-        {{ winner ? 'Play again' : 'Reset' }}
+        {{ winner ? 'Play again' : isDraw ? 'Play again' : 'Reset' }}
       </button>
     </div>
   </div>
@@ -51,7 +58,7 @@ const winner = ref<string | null>(null);
 const isDraw = computed(() => !winner.value && cells.value.every((cell) => cell !== null));
 const isConfettiVisible = ref(false);
 const difficulty = ref<'easy' | 'medium' | 'hard'>('medium');
-const { getAIMove, checkWinner } = useTicTacToeAI({ cells, difficulty });
+const { getAIMove, checkWinner, winningCells } = useTicTacToeAI({ cells, difficulty });
 
 // Does not work in composables DRY
 const disableScroll = () => {
@@ -99,6 +106,7 @@ const resetGame = () => {
   cells.value = Array(9).fill(null);
   currentPlayer.value = 'X';
   winner.value = null;
+  winningCells.value = [];
 };
 </script>
 
