@@ -1,3 +1,5 @@
+import { ref } from 'vue';
+
 type CellValue = 'X' | 'O' | null;
 
 type Board = CellValue[];
@@ -100,6 +102,7 @@ export function useTicTacToeAI({ cells, difficulty }: TicTacToeAIProps) {
     }
   };
 
+  const winningCells = ref<number[]>([]);
   const checkWinner = (): CellValue => {
     const winPatterns = [
       [0, 1, 2],
@@ -118,11 +121,13 @@ export function useTicTacToeAI({ cells, difficulty }: TicTacToeAIProps) {
         cells.value[a] === cells.value[b] &&
         cells.value[a] === cells.value[c]
       ) {
+        winningCells.value = [a, b, c];
         return cells.value[a];
       }
     }
+    winningCells.value = [];
     return null;
   };
 
-  return { getAIMove, checkWinner };
+  return { getAIMove, checkWinner, winningCells };
 }

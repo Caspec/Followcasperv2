@@ -85,3 +85,18 @@ body.dark-mode .blog-intro {
   justify-content: flex-start;
   min-height: 1020px;
 }
+
+.x {
+  color: green;
+  font-weight: bold;
+}
+
+.o {
+  color: blue;
+  font-weight: bold;
+}
+
+.draw {
+  color: black;
+  font-weight: bold;
+}
