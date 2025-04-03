@@ -18,7 +18,7 @@
       :particles="100"
       :fadeOut="true"
     />
-    <div class="mt-5 text-center">
+    <div class="text-center">
       <h2 class="mb-3">Tic Tac Toe</h2>
       <label for="difficulty">Select AI Difficulty:</label>
       <select v-model="difficulty" class="form-select mb-3 w-100 mx-auto text-center">
