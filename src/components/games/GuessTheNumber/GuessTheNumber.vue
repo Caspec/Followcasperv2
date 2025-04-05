@@ -1,16 +1,6 @@
 <template>
   <div class="game-container mt-5">
-    <div class="my-5">
-      <router-link
-        :to="{
-          path: '/games',
-          query: $route.query,
-        }"
-        class="go-back-arrow"
-      >
-        <i class="bi bi-arrow-left"></i> Go Back to Games List
-      </router-link>
-    </div>
+    <GameBackLink label="Go Back to Games List" icon="bi bi-arrow-left" />
     <ConfettiExplosion
       v-if="isConfettiVisible"
       :duration="5000"
@@ -54,6 +44,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import ConfettiExplosion from 'vue-confetti-explosion';
+import GameBackLink from '@/components/ui/GameLinkGoBackUI.vue';
 
 const secretNumber = ref<number | null>(null);
 const guess = ref<number | null>(null);
