@@ -20,6 +20,7 @@
         <option value="easy">Easy (1-10)</option>
         <option value="medium">Medium (1-50)</option>
         <option value="hard">Hard (1-100)</option>
+        <option value="superhard">Super Hard (1-500)</option>
       </select>
 
       <input
@@ -52,10 +53,16 @@ const message = ref('');
 const attempts = ref(0);
 const gameOver = ref(false);
 const isConfettiVisible = ref(false);
-const difficulty = ref<'easy' | 'medium' | 'hard'>('easy');
+const difficulty = ref<'easy' | 'medium' | 'hard' | 'superhard'>('easy');
 
 const maxNumber = computed(() => {
-  return difficulty.value === 'easy' ? 10 : difficulty.value === 'medium' ? 50 : 100;
+  return difficulty.value === 'easy'
+    ? 10
+    : difficulty.value === 'medium'
+      ? 50
+      : difficulty.value === 'hard'
+        ? 100
+        : 500;
 });
 
 function generateRandomNumber() {
