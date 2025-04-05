@@ -1,16 +1,6 @@
 <template>
   <div class="game-container mt-5">
-    <div class="my-5">
-      <router-link
-        :to="{
-          path: '/games',
-          query: $route.query,
-        }"
-        class="go-back-arrow"
-      >
-        <i class="bi bi-arrow-left"></i> Go Back to Games List
-      </router-link>
-    </div>
+    <GameBackLink label="Go Back to Games List" icon="bi bi-arrow-left" />
     <ConfettiExplosion
       v-if="isConfettiVisible"
       :duration="5000"
@@ -51,6 +41,7 @@ import { ref, computed } from 'vue';
 import Board from './TicTacToeBoard.vue';
 import ConfettiExplosion from 'vue-confetti-explosion';
 import { useTicTacToeAI } from '@/composables/useTicTacToeAI';
+import GameBackLink from '@/components/ui/GameLinkGoBackUI.vue';
 
 const cells = ref(Array(9).fill(null));
 const currentPlayer = ref('X');
