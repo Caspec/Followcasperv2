@@ -73,19 +73,10 @@ import { ref } from 'vue';
 import WorkExperience from '@/components/WorkExperience.vue';
 import profileImageSrc from '@/assets/me.png';
 import { funFacts } from '@/content/funFacts';
+import { skills } from '@/content/skills';
 
 const name = ref('Casper');
 const profileImage = ref(profileImageSrc);
-
-const skills = ref([
-  { name: 'Vue', icon: 'bi bi-code-slash' },
-  { name: 'Angular', icon: 'bi bi-box' },
-  { name: 'JavaScript', icon: 'bi bi-braces-asterisk' },
-  { name: 'TypeScript', icon: 'bi bi-braces' },
-  { name: 'Laravel', icon: 'bi bi-layers' },
-  { name: 'Go', icon: 'bi bi-globe' },
-  { name: 'More...', icon: 'bi bi-three-dots' },
-]);
 </script>
 
 <style scoped>
