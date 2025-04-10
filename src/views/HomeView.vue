@@ -10,10 +10,11 @@
         <p class="lead">
           I create high-performance web applications using modern JavaScript frameworks.
         </p>
-        <p class="lead text-warning fw-semibold">🚀 Open to new opportunities!</p>
+        <div>
+          <OpenToWorkBadge />
+        </div>
         <a href="#contact" class="btn btn-primary me-2">Let's talk</a>
       </div>
-      <div></div>
     </header>
 
     <WorkExperience id="work" />
@@ -52,6 +53,7 @@
 import { ref } from 'vue';
 import WorkExperience from '@/components/WorkExperience.vue';
 import AboutMe from '@/components/AboutMe.vue';
+import OpenToWorkBadge from '@/components/ui/OpenToWorkBadgeUI.vue';
 
 import { funFacts } from '@/content/funFacts';
 import { skills } from '@/content/skills';
