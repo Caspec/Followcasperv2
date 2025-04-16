@@ -148,12 +148,16 @@ const getReadingTime = (content: string): number => {
 
 .post-section {
   background-color: #fff;
-  padding: 15px;
+  padding: 20px;
   margin-bottom: 30px;
-  transition: 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   border-radius: 0 !important;
   border: 1px solid #d6d3d7;
   cursor: pointer;
+  will-change: transform, box-shadow;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .post-section h2 {
