@@ -12,6 +12,7 @@
           :key="page"
           class="page-item"
           :class="{ active: currentPage === page }"
+          :data-testid="page === currentPage ? 'active-page' : ''"
         >
           <button class="page-link" @click="changePage(page)">{{ page }}</button>
         </li>
