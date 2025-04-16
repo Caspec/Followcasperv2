@@ -3,7 +3,7 @@
     <router-link
       :to="{
         path: '/games',
-        query: $route.query,
+        query: route.query,
       }"
       class="go-back-arrow"
     >
@@ -13,6 +13,10 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
 defineProps({
   label: {
     type: String,
