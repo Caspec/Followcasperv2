@@ -30,11 +30,11 @@ export const games: Games[] = [
   },
   {
     id: 3,
-    title: 'Space Invaders',
-    date: '2025-03-23',
-    description: 'This is my third game',
-    slug: 'my-third-game',
-    imageHero: 'image3.jpg',
-    tags: ['Space', 'Game'],
+    title: 'Monopoly: First Step',
+    date: '2025-04-20',
+    description: 'A round-board twist on the classic Monopoly game!',
+    slug: 'monopoly',
+    imageHero: 'monopoly.jpg',
+    tags: ['Monopoly', 'Game'],
   },
 ];
