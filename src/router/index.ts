@@ -37,7 +37,7 @@ const router = createRouter({
     {
       path: '/games/monopoly',
       name: 'games/monopoly',
-      component: () => import('@/components/games/Monopoly/MonopolyGame.vue'),
+      component: () => import('@/components/games/Monopoly/monopolyGame.vue'),
     },
   ],
 });
