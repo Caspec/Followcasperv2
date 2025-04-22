@@ -34,11 +34,11 @@ const router = createRouter({
       name: 'games/guess-the-number',
       component: () => import('@/components/games/GuessTheNumber/GuessTheNumber.vue'),
     },
-    {
+    /*{
       path: '/games/monopoly',
       name: 'games/monopoly',
-      component: () => import('@/components/games/Monopoly/monopolyGame.vue'),
-    },
+      component: () => import('@/components/games/Monopoly/MonopolyGame.vue'),
+    },*/
   ],
 });
 
