@@ -18,6 +18,9 @@
 
 <script setup lang="ts">
 import MonopolyTile from '@/components/games/Monopoly/MonopolyTile.vue';
+defineOptions({
+  name: 'MonopolyBoard',
+});
 
 defineProps<{
   spaces: string[];

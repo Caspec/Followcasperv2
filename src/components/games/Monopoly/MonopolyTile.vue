@@ -5,6 +5,9 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  name: 'MonopolyTile',
+});
 defineProps<{
   label: string;
   style: Record<string, string>;

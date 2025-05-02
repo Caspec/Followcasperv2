@@ -22,6 +22,10 @@
 import { ref } from 'vue';
 import ModalUI from './ui/ModalUI.vue';
 
+defineOptions({
+  name: 'ModalContact',
+});
+
 const isVisible = ref(false);
 const email = ref('casper.emde.christensen@gmail.com');
 const emailCopied = ref(false);

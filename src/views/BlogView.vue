@@ -53,6 +53,10 @@ import { useRoute } from 'vue-router';
 import BlogFilter from '@/components/BlogFilter.vue';
 import Pagination from '@/components/ui/PaginationUI.vue';
 
+defineOptions({
+  name: 'BlogView',
+});
+
 const store = useTagStore();
 const route = useRoute();
 const currentPage = ref(1);

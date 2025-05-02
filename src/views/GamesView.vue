@@ -38,6 +38,10 @@
 import { games } from '@/content/games';
 import { useRoute } from 'vue-router';
 
+defineOptions({
+  name: 'GamesView',
+});
+
 const route = useRoute();
 
 // Generate a game link with the current query

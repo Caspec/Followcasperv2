@@ -22,6 +22,10 @@ import { computed, watch, nextTick } from 'vue';
 import { useTagStore } from '@/stores/useTagStore';
 import { useRoute, useRouter } from 'vue-router';
 
+defineOptions({
+  name: 'BlogFilter',
+});
+
 const props = defineProps({
   posts: {
     type: Array as () => Array<{ tags?: string[] }>,

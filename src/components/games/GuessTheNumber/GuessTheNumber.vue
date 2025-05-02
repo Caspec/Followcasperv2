@@ -46,6 +46,9 @@
 import { ref, computed, onMounted } from 'vue';
 import ConfettiExplosion from 'vue-confetti-explosion';
 import GameBackLink from '@/components/ui/GameLinkGoBackUI.vue';
+defineOptions({
+  name: 'GuessTheNumber',
+});
 
 const secretNumber = ref<number | null>(null);
 const guess = ref<number | null>(null);

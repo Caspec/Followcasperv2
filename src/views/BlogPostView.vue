@@ -32,6 +32,10 @@
 import { ref, onMounted } from 'vue';
 import { posts } from '@/content/posts';
 
+defineOptions({
+  name: 'BlogPostView',
+});
+
 type Post = {
   id: number;
   title: string;

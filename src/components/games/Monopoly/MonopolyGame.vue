@@ -19,6 +19,9 @@ import { ref } from 'vue';
 import GameBackLink from '@/components/ui/GameLinkGoBackUI.vue';
 import MonopolyBoard from '@/components/games/Monopoly/MonopolyBoard.vue';
 import MonopolyDice from '@/components/games/Monopoly/MonopolyDice.vue';
+defineOptions({
+  name: 'MonopolyGame',
+});
 
 const boardSpaces = [
   'Space1',
