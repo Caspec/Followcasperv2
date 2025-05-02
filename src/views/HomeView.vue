@@ -58,6 +58,10 @@ import OpenToWorkBadge from '@/components/ui/OpenToWorkBadgeUI.vue';
 import { funFacts } from '@/content/funFacts';
 import { skills } from '@/content/skills';
 
+defineOptions({
+  name: 'HomeView',
+});
+
 const name = ref('Casper');
 </script>
 

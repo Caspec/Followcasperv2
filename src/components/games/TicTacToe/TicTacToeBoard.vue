@@ -12,6 +12,9 @@
 
 <script setup lang="ts">
 import Cell from './TicTacToeCell.vue';
+defineOptions({
+  name: 'TicTacToeBoard',
+});
 defineProps<{ cells: (string | null)[]; winningCells: number[] }>();
 </script>
 

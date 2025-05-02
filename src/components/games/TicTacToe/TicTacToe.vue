@@ -42,6 +42,9 @@ import Board from './TicTacToeBoard.vue';
 import ConfettiExplosion from 'vue-confetti-explosion';
 import { useTicTacToeAI } from '@/composables/useTicTacToeAI';
 import GameBackLink from '@/components/ui/GameLinkGoBackUI.vue';
+defineOptions({
+  name: 'TicTacToe',
+});
 
 const cells = ref(Array(9).fill(null));
 const currentPlayer = ref('X');

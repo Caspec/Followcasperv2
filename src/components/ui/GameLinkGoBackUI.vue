@@ -14,6 +14,9 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+defineOptions({
+  name: 'GameLinkGoBackUI',
+});
 
 const route = useRoute();
 

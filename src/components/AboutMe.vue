@@ -27,7 +27,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import profileImageSrc from '@/assets/me.png';
-
+defineOptions({
+  name: 'AboutMe',
+});
 const profileImage = ref(profileImageSrc);
 </script>
 

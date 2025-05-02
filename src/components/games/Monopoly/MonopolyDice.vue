@@ -8,6 +8,10 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  name: 'MonopolyDice',
+});
+
 const emit = defineEmits<{
   (e: 'rollDice', value: number): void;
 }>();

@@ -5,6 +5,12 @@
   </div>
 </template>
 
+<script setup lang="ts">
+defineOptions({
+  name: 'OpenToWorkBadgeUI',
+});
+</script>
+
 <style scoped>
 .availability-badge {
   display: inline-flex;

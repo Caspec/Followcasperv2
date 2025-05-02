@@ -19,9 +19,12 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  name: 'FooterComponent',
+});
+defineEmits(['openContactModal']);
 const github = 'https://github.com/Caspec';
 const linkedin = 'https://www.linkedin.com/in/casper-christensen88';
-defineEmits(['openContactModal']);
 </script>
 
 <style scoped>

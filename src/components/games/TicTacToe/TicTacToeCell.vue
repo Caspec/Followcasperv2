@@ -13,6 +13,9 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  name: 'TicTacToeCell',
+});
 defineProps<{ value: string | null; isWinning: boolean }>();
 </script>
 

@@ -23,6 +23,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+defineOptions({
+  name: 'WorkExperience',
+});
+
 const jobs = ref([
   {
     year: '2024-2025',
