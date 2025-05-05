@@ -95,4 +95,10 @@ const jobs = ref([
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+.card i {
+  vertical-align: middle;
+  line-height: 1;
+  position: relative;
+}
 </style>
