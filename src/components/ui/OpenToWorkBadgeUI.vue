@@ -1,7 +1,7 @@
 <template>
   <div class="availability-badge">
     🚀<span class="dot" aria-hidden="true"></span>
-    <span class="lead text-warning fw-semibold">Open to new opportunities!</span>
+    <span class="lead text-warning fw-semibold">Focused on current role</span>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ defineOptions({
 .dot {
   width: 12px;
   height: 12px;
-  background-color: #28a745;
+  background-color: #a30606;
   border-radius: 50%;
   animation: pulse 1.5s infinite ease-in-out;
 }
