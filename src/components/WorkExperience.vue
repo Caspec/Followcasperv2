@@ -29,6 +29,20 @@ defineOptions({
 
 const jobs = ref([
   {
+    year: '2025-Present',
+    title: 'Frontend Developer',
+    company: 'JP/Politikens hus A/S',
+    icon: 'bi bi-braces',
+    tasks: [
+      'Developed AI tools in Svelte 5 and TypeScript within the Magna system.',
+      'Enhanced features supporting journalists and newsroom workflows.',
+      'Worked on transcription functionality to improve editorial efficiency.',
+      'Collaborated closely with backend developers and UX/UI designer to refine user experience.',
+      'Utilized GitHub, Docker, and AWS cloud.',
+      'Worked in frontend product team, applying product methodology in an agile environment.',
+    ],
+  },
+  {
     year: '2024-2025',
     title: 'Software Engineer',
     company: 'Andel A/S',

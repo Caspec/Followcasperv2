@@ -6,7 +6,7 @@
         <h1 class="display-3 fw-bold">
           Hey, I'm <span class="text-primary">{{ name }}</span>
         </h1>
-        <h4>Frontend and Full Stack Developer | Vue, Typescript, Angular, Laravel and Go</h4>
+        <h4>Frontend Developer | Vue, Typescript and Svelte</h4>
         <p class="lead">
           I create high-performance web applications using modern JavaScript frameworks.
         </p>
