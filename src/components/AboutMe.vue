@@ -7,7 +7,7 @@
       <div class="col-lg-8 col-md-12">
         <h2 class="mb-4">About Me</h2>
         <p>
-          Hello! I'm an experienced frontend developer specializing in Vue and Angular, with
+          Hello! I'm an experienced frontend developer specializing in Vue and Svelte, with
           full-stack expertise in Laravel & Go. Passionate about creating
           <strong>fast, beautiful, and interactive web applications</strong> that provide seamless
           user experiences.

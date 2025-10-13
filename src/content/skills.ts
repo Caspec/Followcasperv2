@@ -5,7 +5,7 @@ export type Skills = {
 
 export const skills: Skills[] = [
   { name: 'Vue', icon: 'bi bi-code-slash' },
-  { name: 'Angular', icon: 'bi bi-box' },
+  { name: 'Svelte', icon: 'bi bi-box' },
   { name: 'JavaScript', icon: 'bi bi-braces-asterisk' },
   { name: 'TypeScript', icon: 'bi bi-braces' },
   { name: 'Laravel', icon: 'bi bi-layers' },
