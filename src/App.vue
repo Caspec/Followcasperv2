@@ -43,8 +43,8 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/games">Games</router-link>
             </li>
-            <li class="nav-item mt-1">
-              <button @click="toggleDarkMode" class="dark-mode-btn">
+            <li class="nav-item d-flex align-items-center">
+              <button @click="toggleDarkMode" class="dark-mode-btn nav-link">
                 <span v-if="isDarkMode">☀️</span>
                 <span v-else>🌙</span>
               </button>
@@ -175,24 +175,20 @@ body {
 }
 
 .dark-mode-btn {
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 5px;
-  border: 1px solid #000;
-  transition: background 0.2s ease-in-out;
+  padding: 0;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .dark-mode-btn:hover {
-  transform: scale(1.05);
-}
-
-body:not(.dark-mode) .dark-mode-btn {
-  background: #000;
-  color: #fff;
-}
-
-body.dark-mode .dark-mode-btn {
-  background: #fff;
-  color: #000;
+  transform: scale(1.2);
+  background: transparent;
 }
 </style>
